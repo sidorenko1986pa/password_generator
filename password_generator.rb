@@ -14,6 +14,7 @@ class PasswordGenerator
   end
 
   def generator(arg)
+    p CONSONANTS
     if arg[:size] > 3
       LIST_PASSWORDS.times do
         @result = []
@@ -39,4 +40,4 @@ end
 
 password = PasswordGenerator.new
 puts "Введите длинну пароля"
-puts password.generator(size: gets.chomp.to_i)
+puts password.generator(size: STDIN.gets.chomp.to_i)
