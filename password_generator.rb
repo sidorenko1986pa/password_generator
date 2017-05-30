@@ -9,16 +9,8 @@ class PasswordGenerator
     @result_list = []
   end
 
-  def check_double_vowels(letter)
-    (VOWELS & @result.last(2)).size == 2 ? CONSONANTS.sample : letter
-  end
-
-  def check_double_consonants(letter)
-    (CONSONANTS & @result.last(2)).size == 2 ? VOWELS.sample : letter
-  end
-
   def check_vowel_or_consonant(letter)
-    VOWELS.include?(letter) ? check_double_vowels(letter) : check_double_consonants(letter)
+    VOWELS.include?(letter) ? PasswordGenerator.check_double_vowels(letter, @result) : PasswordGenerator.check_double_consonants(letter, @result)
   end
 
   def generator(arg)
@@ -34,6 +26,15 @@ class PasswordGenerator
       exit 1
     end
   end
+
+  private
+    def self.check_double_vowels(letter, result)
+      (VOWELS & result.last(2)).size == 2 ? CONSONANTS.sample : letter
+    end
+
+    def self.check_double_consonants(letter, result)
+      (CONSONANTS & result.last(2)).size == 2 ? VOWELS.sample : letter
+    end
 end
 
 password = PasswordGenerator.new
